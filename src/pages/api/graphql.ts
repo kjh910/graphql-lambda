@@ -3,29 +3,29 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-co
 import  {  ApolloServer  }  from  'apollo-server-micro';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import  {  resolvers  }  from  './resolvers';
-import  {  typeDefs  }  from  './schemas';
+import  { resolvers }  from  './resolvers';
+import  { typeDefs }  from  './schemas';
 
 
 
-const  apolloServer  =  new  ApolloServer({  typeDefs,  resolvers, plugins: [
-  ApolloServerPluginLandingPageGraphQLPlayground()
+const apolloServer = new ApolloServer({ typeDefs, resolvers, plugins: [
+    ApolloServerPluginLandingPageGraphQLPlayground()
 ]  });
 
-export  const  config  =  {
-  api:  {
-    bodyParser:  false
-  }
+export const config  =  {
+    api: {
+        bodyParser: false
+    }
 };
 
 const startServer = apolloServer.start();
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+    req: NextApiRequest,
+    res: NextApiResponse
 ) {
-  await startServer;
-  await apolloServer.createHandler({
-    path: '/api/graphql',
-  })(req, res);
+    await startServer;
+    await apolloServer.createHandler({
+        path: '/api/graphql',
+    })(req, res);
 }

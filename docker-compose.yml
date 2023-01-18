@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  graphql-lambda:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+    container_name: graphql-lambda
+    ports:
+      - "80:80"
+    tty: true
+
+    networks:
+      - graphql-lambda
+
+networks:
+  graphql-lambda:
+    name: graphql-lambda
+    driver: bridge
